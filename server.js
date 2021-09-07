@@ -33,7 +33,7 @@ app.get('/weather', (req, res) => {
 
     const returnArray = weather.find((item) => {
 
-        return (item.city_name === city_name) 
+        return (item.city_name.toLowerCase() === city_name.toLowerCase()) 
     });
     if (returnArray){
         // let arrayOfReturn= returnArray.data;

@@ -10,6 +10,8 @@ require('dotenv').config();
 
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 
+const Movie_API_KEY = process.env.Movie_API_KEY;
+
 const weather = require('./data/weather.json')
 app.get('/', // our endpoint name
     function (req, res) { // callback function of what we should do with our request
@@ -22,9 +24,6 @@ class Forecast {
     }
 
 }
-
-
-
 app.get('/weather', async (req, res) => {
     // console.log(request);
 
@@ -70,6 +69,36 @@ catch (error) {
     
 
 });
+
+class Movie {
+    constructor(title, overview,vote_average,vote_count,poster_path,popularity,release_date) {
+        this.title = title;
+        this.overview = overview;
+        this.vote_average = vote_average;
+        this.vote_count = vote_count;
+        this.poster_path = poster_path;
+        this.popularity = popularity;
+        this.release_date = release_date;
+    }
+
+}
+
+app.get('/movies', async (req, res) => {
+try{
+    let city_name = req.query.query;
+    const movieUrl = 'https://api.themoviedb.org/3/search/movie';
+    const movieResponse = await axios.get(`${movieUrl}?api_key=${Movie_API_KEY}&query=${city_name}`);
+  
+        let newArray=movieResponse.data.results.map((element)=>{
+            return new Movie(element.title,element.overview,element.vote_average,element.vote_count,element.poster_path,element.popularity,element.release_date);
+           
+    })
+    res.json(newArray);
+}catch(error){
+    res.json(error);
+  }
+});
+
 // console.log("hello");
 app.listen(3001,()=>{
     console.log(" is working from port");

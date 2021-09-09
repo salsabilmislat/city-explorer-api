@@ -13,9 +13,7 @@
   },
   "author": "salsabil",
   "license": "MIT",
-  "engines": {
-    "node": "14.15.1"
-  },
+
   "bugs": {
     "url": "https://github.com/salsabilmislat/city-explorer-api/issues"
   },

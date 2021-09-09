@@ -19,5 +19,6 @@ app.get('/movies', getMovie);
 
 
 app.listen(3001,()=>{
+    
     console.log(" is working from port");
 }) 

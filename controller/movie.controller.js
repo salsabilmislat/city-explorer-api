@@ -1,7 +1,7 @@
 'use strict';
 const axios = require('axios');
 require('dotenv').config();
-const Movie_API_KEY = process.env.Movie_API_KEY;
+const MOVIE_API_KEY = process.env.MOVIE_API_KEY;
 
 const Movie = require('../models/movie.model');
 
@@ -25,7 +25,7 @@ const getMovie = async (req, res) => {
         const movieUrl = 'https://api.themoviedb.org/3/search/movie';
 
         try {
-            const movieResponse = await axios.get(`${movieUrl}?api_key=${Movie_API_KEY}&query=${city_name}`);
+            const movieResponse = await axios.get(`${movieUrl}?api_key=${MOVIE_API_KEY}&query=${city_name}`);
 
             let newArray = movieResponse.data.results.map((element) => {
                 return new Movie(element.title, element.overview, element.vote_average, element.vote_count, element.poster_path, element.popularity, element.release_date);

@@ -17,8 +17,8 @@ app.get('/weather', getWeather );
 
 app.get('/movies', getMovie);
 
-
-app.listen(3001,()=>{
+const PORT = process.env.PORT;
+app.listen(PORT,()=>{
     
     console.log(" is working from port");
 }) 
